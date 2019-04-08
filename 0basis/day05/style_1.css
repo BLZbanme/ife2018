@@ -1,0 +1,32 @@
+body {
+    margin:0 auto;
+    font-size: 10px;
+    width: 70%;
+    max-width: 900px;
+}
+
+#jbxx p {
+    width: 30%;
+    float: left;
+}
+
+#lxfs p {
+    width: 30%;
+    float: left;
+}
+
+h1 {
+    font-size: 1.6rem;
+}
+
+h2 {
+    clear: both;
+    font-size: 1.3rem;
+}
+p {
+    font-size: 1.1rem;
+    line-height:10px;
+}
+span {
+    font-weight: bold;
+}
