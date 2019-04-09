@@ -1,0 +1,85 @@
+body {
+    margin:0 auto;
+    font-size: 10px;
+    width: 80%;
+    max-width: 1200px;
+}
+
+#jl {
+    padding-top: 3%;
+    padding-bottom: 3%;
+    background-color: grey;
+}
+
+.bt {
+    width: 12%;
+    float: left;
+    margin-right: 3%;
+    background-color: #cccccc;
+    /* margin:auto; */
+    margin-bottom: 1px;
+    height: 125px;
+}
+
+.lr {
+    width: 85%;
+    float: left;
+    height: 125px;
+    margin-bottom: 1px;
+}
+
+/* .xx :nth-child(1) {
+    width: 15%;
+    float: left;
+    height: 50px;
+}
+
+.xx :nth-child(2) {
+    width: 85%;
+    float: left;
+    height: 50px;
+} */
+
+.xx :nth-child(1) {
+    display: inline-block;
+}
+
+.xx :nth-child(2) {
+    display: inline-block;
+}
+
+#jbxx p {
+    width: 30%;
+    float: left;
+}
+
+#lxfs p {
+    width: 30%;
+    float: left;
+}
+
+h1 {
+    font-size: 1.4rem;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 3%;
+    color: white;
+}
+
+h2 {
+    margin-top: 0;
+    margin-bottom: 0;
+    clear: both;
+    font-size: 1.3rem;
+    text-align: center;
+     margin: auto;
+    line-height: 125px; 
+}
+p {
+    font-size: 1.1rem;
+    line-height:10px;
+}
+
+span {
+    font-weight: bold;
+}
