@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Flexbox</title>
+        <style>
+            body{
+                width: 70%;
+                max-width: 900px;
+                margin: 0 auto;
+                display: flex;
+            }
+            #left {
+                flex-grow: 1;
+                background-color: aqua;
+                color: white;
+                height: 900px;
+            }
+            #right {
+                background-color: yellow;
+                color: white;
+                height: 900px;
+                flex-basis: 200px;
+                flex-shrink: 0;
+                width: 200;
+            }
+            p{
+                text-align: center;
+                font-size: 2.6rem;
+            }
+        </style>
+    </head>
+    <body>
+        <div id='left'>
+            <p>左边</p>
+        </div>
+        <div id='right'>
+            <p>右边</p>
+        </div>
+    </body>
+</html>
