@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Float</title>
+        <style>
+            body{
+                width: 100%;
+                margin: 0;
+                overflow: auto;
+            }
+            header {
+                width: 100%;
+                background-color: black;
+                height : 80px;
+                margin-top: 0;
+                margin-bottom: 0;
+            }
+            .mid-div {
+               width: 960px;
+               margin: 0 auto;
+               height: 100%;
+            }
+            #header-nav {
+                float: right;
+            }
+            h1 {
+                color: white;
+                float: left;
+                margin-top: 19px;
+                margin-bottom: 19px;
+            }
+            a {
+                color: white;
+               
+            }
+            #banner {
+                width: 100%;
+                background-color: greenyellow;
+                height:200px;
+            }
+            #banner-ol{
+                list-style-type: none;
+                position: relative;
+                left: 820px;
+                top:160px;
+                margin-top: 0;
+                margin-bottom: 0;
+                padding-left: 0;
+                width: 150px;
+            }
+            #banner-ol li{
+                display: inline;
+            }
+            #banner-ol li a{
+                display: inline-block;
+                border: solid black 1px; 
+                width: 20px;
+                height: 25px;
+                text-align: center;
+                background-color: white;
+                color: black;
+            }
+            #banner-ol li a.show{
+                display: inline-block;
+                border: solid black 1px; 
+                width: 20px;
+                height: 25px;
+                text-align: center;
+                padding-top: 10px;
+            }
+
+            main {
+                width: 100%;
+                margin: 0;
+                height: 661px;
+            }
+
+            .nav{
+                width: 960px;
+                height: 80px;
+                margin: 0 auto;
+            }
+
+            ul{
+                list-style-type: none;
+                height: 50px;
+                margin: 0;
+                padding-left: 0;
+                position: relative;
+                top: 30px;
+            }
+
+            ul li {
+                width: 120px;
+                height: 50px;   
+                background: gray;
+                font-size: 1rem;
+                border-radius: 1.2rem 1.2rem 0 0;
+                /* display: inline-block; */
+                float: left;
+                text-align: center;
+                border:grey 1px solid;
+            }
+
+            ul li a {
+                color: black;
+                position: relative;
+                top: 15px;
+            }
+
+            ul li.choose {
+                background: white;
+                border-bottom: none;
+            }
+
+            .whole-main {
+                width: 100%;
+                margin: 0;
+                height: 580px;
+                border-top: grey 1px solid;
+            }
+
+            .display-main {
+                width: 960px;
+                margin: 0 auto;
+                height: 550px;
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+            .row1, .row2, .row3 {
+                margin: 3px;
+                border: grey 1px solid;
+            }
+
+            .row1 p, .row2 p, .row3 p  {
+                padding: 80px;
+                margin: 0px;
+            }
+
+            footer {
+                width: 100%;
+                height: 100px;
+                background: black;
+            }
+
+            .foot {
+                margin: 0;
+                color: white;
+                padding-top: 15px;
+                text-align: center;
+            }
+
+        </style>    
+    </head>
+    <body>
+        <header>
+            <div class='mid-div'>
+                <h1>Logo</h1>
+                <p id='header-nav'>
+                    <a href='#'>Github</a>
+                    <a href='#'>Register</a>
+                    <a href='#'>Login</a>
+                </p>
+            </div>
+        </header>
+        <div id='banner'>
+            <div class='mid-div'>
+                <ol id='banner-ol'>
+                    <li><a class='show'>1</a></li>
+                    <li><a>2</a></li>
+                    <li><a>3</a></li>
+                    <li><a>4</a></li>
+                </ol>
+            </div>
+        </div>
+        <main>
+            <div class='nav'>
+                <ul>
+                    <li class='choose'><a >HOME</a></li>
+                    <li><a>PROFILE</a></li>
+                    <li><a>ABOUT</a></li>
+                </ul>
+            </div>
+            <div class='whole-main'>
+                <div class='display-main'>
+                  <div class='row1'><p>This is Content1</p></div>
+                  <div class='row1'><p>MaybeContent2</p></div>
+                  <div class='row1'><p>Content3</p></div>
+                  <div class='row2'><p>Content4</p></div>
+                  <div class='row2'><p>Content5</p></div>
+                  <div class='row2'><p>Content6</p></div>
+                  <div class='row2'><p>Content7</p></div>
+                  <div class='row3'><p>Content8</p></div>
+                  <div class='row3'><p>Content9</p></div>
+                  <div class='row3'><p>Content10</p></div>
+                </div>
+            </div>
+        </main>
+        <footer>
+            <p class='foot'>
+                @ 2018 ife.baidu.com
+            </p>
+        </footer>
+        <script>
+            function setAsAttribute(as, n){
+                as[n].onmousemove = function(){
+                    as[n].setAttribute('class', 'show');
+                    for(var i = 0; i < as.length; i++){
+                        if(i == n){
+                            continue;
+                        }
+                        if(as[i].getAttribute('class')){
+                            as[i].removeAttribute('class');
+                        }
+                    }
+                }
+
+                as[n].onclick = function(){
+                    as[n].setAttribute('class', 'show');
+                    for(var i = 0; i < as.length; i++){
+                        if(i == n){
+                            continue;
+                        }
+                        if(as[i].getAttribute('class')){
+                            as[i].removeAttribute('class');
+                        }
+                    }
+                }
+            }
+            var as = document.querySelectorAll('#banner-ol li a');
+            for(var i = 0; i < as.length; i++){
+                setAsAttribute(as, i);
+            }
+
+        </script>
+    </body>
+</html>

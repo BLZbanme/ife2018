@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Float</title>
+        <style>
+            body{
+                width: 70%;
+                max-width: 900px;
+                margin: 0 auto;
+                /* display: flow-root 非可继承属性？ */
+            }
+            #left {
+                width: 200px;
+                float: left;
+                background-color: aqua;
+                color: white;
+                height: 900px;
+            }
+            #right {
+                background-color: yellow;
+                color: white;
+                height: 900px;
+                /* overflow: hidden; */
+                display: flow-root;
+            }
+            #mid {
+                width: 200px;
+                float: left;
+                background-color: rgb(255, 0, 255);
+                color: white;
+                height: 900px;
+            }
+            p{
+                text-align: center;
+                font-size: 2.6rem;
+            }
+        </style>
+    </head>
+    <body>
+        <div id='left'>
+            <p>左边</p>
+        </div>
+        <div id='mid'>
+            <p>中间</p>
+        </div>
+        <div id='right'>
+                <p>右边</p>
+            </div>
+    </body>
+</html>
