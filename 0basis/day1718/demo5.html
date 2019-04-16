@@ -16,6 +16,17 @@
                 tmp.innerHTML = (j + 1).toString() + ' * ' + (i + 1).toString() + ' = ' + (i + 1) * (j + 1);
             }
         }
+        var now = new Date();
+        var nowHour = now.getHours();
+        if(nowHour >= 6 && nowHour < 10){
+            alert('帅哥，早上好');
+        }else if( nowHour >= 14 && nowHour < 18){
+            alert('帅哥，下午好');
+        }else if( nowHour >= 10 && nowHour < 14){
+            alert('帅哥，中午好');
+        }else{
+            alert('帅哥，晚上好');
+        }
       </script>
 </body>
 </html>
