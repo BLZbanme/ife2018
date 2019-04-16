@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">    
+    <title>IFE ECMAScript</title>
+</head>
+<body>        
+    <table>
+    </table>
+    <script>
+        for(var i = 0; i < 9; i++){
+            var tb = document.querySelector('table');
+            var tr = tb.insertRow(i);
+            for(var j = 0; j <= i; j++){
+                var tmp = tr.insertCell(j);
+                tmp.innerHTML = (j + 1).toString() + ' * ' + (i + 1).toString() + ' = ' + (i + 1) * (j + 1);
+            }
+        }
+      </script>
+</body>
+</html>
