@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>day2224</title>
+  <style>
+   
+  </style>
+</head>
+<body>
+    <div>
+        <label>String A:
+            <input id="radio-a" type="radio" checked="true" name="str-obj" value="a">
+        </label>
+        <textarea id="str-a"></textarea>
+        <label>String B:
+            <input id="radio-b" type="radio" name="str-obj" value="b">
+        </label>
+        <textarea id="str-b"></textarea>        
+        <label>Num A：<input id="num-a" type="number" value="0"></label>
+        <label>Num B：<input id="num-b" type="number" value="1"></label>
+    </div>
+    <div>
+        <button>获取当前选中输入的内容长度</button>
+        <button>当前选中输入中的第3个字符</button>
+        <button>把两个输入框的文字连接在一起输出（concat）</button>
+        <button>输入B中的内容，在输入A的内容中第一次出现的位置（indexOf）</button>
+        <button>输入A中的内容，在输入B的内容中最后一次出现的位置（lastIndexOf）</button>
+        <button>使用slice获取选中输入框内容的部分内容，参数为num-a及num-b</button>
+        <button>当前选中输入框的行数</button>
+        <button>使用substr获取选中输入框内容的子字符串，参数为num-a及num-b</button>
+        <button>把所选输入框中的内容全部转为大写</button>
+        <button>把所选输入框中的内容全部转为小写</button>
+        <button>把所选输入框中内容的半角空格全部去除</button>
+        <button>把所选输入框中内容的a全部替换成另外一个输入框中的内容</button>
+    </div>
+    <p id="result"></p>
+    <script>
+            function getNowLength(){
+                var A = document.querySelector('#radio-a');
+                var B = document.querySelector('#radio-b');
+                var txt = '';
+                if(A.checked){
+                    txt = document.querySelector('#str-a').value;
+                }else{
+                    txt = document.querySelector('#str-b').value;
+                }
+                document.querySelector('p').innerHTML = txt.length;
+            }
+
+            function theThird(){
+                var A = document.querySelector('#radio-a');
+                var B = document.querySelector('#radio-b');
+                var txt = '';
+                if(A.checked){
+                    txt = document.querySelector('#str-a').value;
+                }else{
+                    txt = document.querySelector('#str-b').value;
+                }
+                document.querySelector('p').innerHTML = txt.length > 2 ? txt.charAt(2) : '字符串过短';
+            }
+
+            function concat(){
+                var Atxt = document.querySelector('#str-a').value;
+                var Btxt = document.querySelector('#str-b').value;
+                document.querySelector('p').innerHTML = Atxt + Btxt;
+            }
+
+            function search(){
+                var Atxt = document.querySelector('#str-a').value;
+                var Btxt = document.querySelector('#str-b').value;
+                document.querySelector('p').innerHTML = Atxt.indexOf(Btxt);
+            }
+
+            function dxsearch(){
+                var Atxt = document.querySelector('#str-a').value;
+                var Btxt = document.querySelector('#str-b').value;
+                document.querySelector('p').innerHTML = Atxt.lastIndexOf(Btxt);
+            }
+
+            function slice(){
+                var A = document.querySelector('#radio-a');
+                var B = document.querySelector('#radio-b');
+                var txt = '';
+                if(A.checked){
+                    txt = document.querySelector('#str-a').value;
+                }else{
+                    txt = document.querySelector('#str-b').value;
+                }
+                var start = document.querySelector('#num-a').value;
+                var end = document.querySelector('#num-b').value;
+                document.querySelector('p').innerHTML = txt.slice(start, end);
+            }
+
+            function getRows(){
+                var A = document.querySelector('#radio-a');
+                var B = document.querySelector('#radio-b');
+                var txt = '';
+                if(A.checked){
+                    txt = document.querySelector('#str-a').value.split('\n').length;
+                }else{
+                    txt = document.querySelector('#str-b').value.split('\n').length;
+                }
+                document.querySelector('p').innerHTML = txt;
+            }
+
+            function substr(){
+                var A = document.querySelector('#radio-a');
+                var B = document.querySelector('#radio-b');
+                var txt = '';
+                if(A.checked){
+                    txt = document.querySelector('#str-a').value;
+                }else{
+                    txt = document.querySelector('#str-b').value;
+                }
+                var start = document.querySelector('#num-a').value;
+                var end = document.querySelector('#num-b').value;
+                document.querySelector('p').innerHTML = txt.substr(start, end);
+            }
+
+            function upper(){
+                var A = document.querySelector('#radio-a');
+                var B = document.querySelector('#radio-b');
+                var txt = '';
+                if(A.checked){
+                    txt = document.querySelector('#str-a').value;
+                }else{
+                    txt = document.querySelector('#str-b').value;
+                }
+                document.querySelector('p').innerHTML = txt.toUpperCase();
+            }
+
+            function lowwer(){
+                var A = document.querySelector('#radio-a');
+                var B = document.querySelector('#radio-b');
+                var txt = '';
+                if(A.checked){
+                    txt = document.querySelector('#str-a').value;
+                }else{
+                    txt = document.querySelector('#str-b').value;
+                }
+                document.querySelector('p').innerHTML = txt.toLowerCase();
+            }
+
+            function clear(){
+                var A = document.querySelector('#radio-a');
+                var B = document.querySelector('#radio-b');
+                var txt = '';
+                if(A.checked){
+                    txt = document.querySelector('#str-a').value;
+                }else{
+                    txt = document.querySelector('#str-b').value;
+                }
+                document.querySelector('p').innerHTML = txt.replace( /(^\s*)|(\s*$)/g , "");
+            }
+
+            function change(){
+                var A = document.querySelector('#radio-a');
+                var B = document.querySelector('#radio-b');
+                var txt = '';
+                if(A.checked){
+                    txt = document.querySelector('#str-a').value.replace('a', document.querySelector('#str-b').value);
+                }else{
+                    txt = document.querySelector('#str-b').value.replace('a', document.querySelector('#str-a').value);;
+                }
+                document.querySelector('p').innerHTML = txt;
+            }
+
+            var div = document.querySelectorAll('div')[1];
+            div.onclick = function(e){
+                switch(e.target.innerHTML){
+                    case '获取当前选中输入的内容长度': 
+                        getNowLength();
+                        break;
+                    case '当前选中输入中的第3个字符':
+                        theThird();
+                        break;
+                    case '把两个输入框的文字连接在一起输出（concat）':
+                        concat();
+                        break;
+                    case '输入B中的内容，在输入A的内容中第一次出现的位置（indexOf）':
+                        search();
+                        break;
+                    case '输入A中的内容，在输入B的内容中最后一次出现的位置（lastIndexOf）':
+                        dxsearch();
+                        break;
+                    case '使用slice获取选中输入框内容的部分内容，参数为num-a及num-b':
+                        slice();
+                        break;    
+                    case '当前选中输入框的行数':
+                        getRows();
+                        break;   
+                    case '使用substr获取选中输入框内容的子字符串，参数为num-a及num-b':
+                        substr();
+                        break;    
+                    case '把所选输入框中的内容全部转为大写':
+                        upper();
+                        break;        
+                    case '把所选输入框中的内容全部转为小写':
+                        lowwer();
+                        break; 
+                    case '把所选输入框中内容的半角空格全部去除':
+                        clear();
+                        break;
+                    case '把所选输入框中内容的a全部替换成另外一个输入框中的内容':
+                        change();
+                        break;
+                }
+            }
+    </script>
+</body>
+</html>
