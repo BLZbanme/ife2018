@@ -28,29 +28,65 @@
         function check(){
             var A = document.querySelector('#radio-a');
             var B = document.querySelector('#radio-b');
-            if(A.value){
-                var numA = document.querySelector('#num-a').value;
-                var reg = /^[0-9]+\.?[0-9]*$/;
-                if(reg.test(numA)){
-                    alert('是数字');
-                }else{
-                    alert('不是数字！');
-                }
-            }else if(B.value){
-                var numB = document.querySelector('#num-B').value;
-                var reg = /^[0-9]+\.?[0-9]*$/;
-                if(reg.test(numA)){
-                    alert('是数字');
-                }else{
-                    alert('不是数字！');
-                }
+            var num;
+            if(A.checked){
+                num = document.querySelector('#num-a').value;
+                
+            }else if(B.checked){
+                num= document.querySelector('#num-b').value;
+            }else{
+                alert('请先选择输入框！');
+                return;
+            }
+            var reg = /^[0-9]+\.?[0-9]*$/;
+            if(reg.test(num)){
+                alert('是数字');
+            }else{
+                alert('不是数字！');
             }
         }
+
+        function sswr(){
+            var A = document.querySelector('#num-a').value;
+            var B = document.querySelector('#num-b').value;
+            var AString = A.toString();
+            var dian = AString.search(/./);
+            var result;
+            if(dian == 0 && B != 0){
+                result = A + '.';
+                for(i = 0; i < B; i++){
+                    result += '0';
+                }
+                document.querySelector('#num-a').value = result;
+                return;
+            }
+            var AWs = A.length - dian;
+            if(AWs > B){
+                var later = AString.charAt(dian + B + 1);
+                var now = parseInt(AString.charAt(dian + B));
+                now += parseInt(later) > 4 ? 1 : 0;
+                result = AString.substr(dian + B - 1) + now;
+                document.querySelector('#num-a').value = parseFloat(result);
+                return;
+            }else{
+                var cha = B - AWs;
+                for(let i = 0; i < cha; i++){
+                    result += '0';
+                }
+                document.querySelector('#num-a').value = parseFloat(result);
+                return;
+            }
+
+        }
+
         var div = document.querySelectorAll('div')[1];
         div.onclick = function(e){
             switch(e.target.innerHTML){
                 case '判断当前选中的输入框输入内容是否为数字':
                     check();
+                    break;
+                case '把 A 四舍五入为 B 个小数位数的数字':
+                    sswr();
                     break;
             }
         }
