@@ -50,9 +50,9 @@
             var A = document.querySelector('#num-a').value;
             var B = document.querySelector('#num-b').value;
             var AString = A.toString();
-            var dian = AString.search(/./);
+            var dian = AString.search(/\./);
             var result;
-            if(dian == 0 && B != 0){
+            if(dian == -1 && B != 0){
                 result = A + '.';
                 for(i = 0; i < B; i++){
                     result += '0';
@@ -60,20 +60,21 @@
                 document.querySelector('#num-a').value = result;
                 return;
             }
-            var AWs = A.length - dian;
+            var AWs = A.length - dian - 1;
             if(AWs > B){
-                var later = AString.charAt(dian + B + 1);
-                var now = parseInt(AString.charAt(dian + B));
+                var later = AString.charAt(parseInt(dian) + parseInt(B) + 1);
+                var now = parseInt(AString.charAt(parseInt(dian) + parseInt(B)));
                 now += parseInt(later) > 4 ? 1 : 0;
-                result = AString.substr(dian + B - 1) + now;
-                document.querySelector('#num-a').value = parseFloat(result);
+                result = AString.substr(parseInt(dian) + parseInt(B)- 1) + now;
+                document.querySelector('#num-a').value = result;
                 return;
             }else{
                 var cha = B - AWs;
+                result = A;
                 for(let i = 0; i < cha; i++){
                     result += '0';
                 }
-                document.querySelector('#num-a').value = parseFloat(result);
+                document.querySelector('#num-a').value = result;
                 return;
             }
 
