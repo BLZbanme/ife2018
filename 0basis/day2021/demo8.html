@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>css sprite</title>
+<link rel="stylesheet" href="style.css" type="text/css">
+<style>
+    body{
+        margin: 0 auto;
+    }
+    div{
+        margin: 0 auto;
+        width: 480px;
+        height: 480px;
+        background: url(./2.jpg);
+    }
+</style>
+</head>
+<body>
+    <div></div>
+    <script>
+        var tmp = 0;
+        function push(){
+            var div = document.querySelector('div');
+            div.style.backgroundPosition = '0px -' + (tmp++ * 480) + 'px';
+        }
+        function pop(){
+            var div = document.querySelector('div');
+            div.style.backgroundPosition = '0px -' + (--tmp * 480) + 'px';
+        }
+        for(let i = 0 ; i < 34; i++){
+            if(i < 17){
+                setTimeout(push, i * 100);
+            }else{
+                setTimeout(pop, i * 100);
+            }
+        }
+    </script>
+</body>
+</html>
+
+
