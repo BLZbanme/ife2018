@@ -43,16 +43,57 @@ var menuArr = [
     [8, "Area2-2-1", 6],
 ];
 
-function creatObj(name, subMenu){
+function node(name){
     this.name = name;
-    this.subMenu = subMenu;
+    // this.subMenu = new Object();
 }
 
-function arr2Obj(){
-    var menuObject = new Object();
-    for(var i = 0; i < menuArr.length; i++){
-        if(menuArr[i][2] == -1){
-            
+function findId(objs, n){
+    for(obj in objs){
+        if(obj == n){
+           return objs[obj];
+        }else{
+            findSub(objs[obj], n);
         }
     }
 }
+
+function findSub(objs, n){
+    if(objs != null){
+        for(obj in objs){
+            if(obj == n){
+                return objs[obj];
+            }else{
+                if(objs[obj].subMenu != null){
+                    findSub(objs[obj][subMenu], n);
+                }
+            }
+        }
+    }
+}
+
+function arr2Obj(){
+    debugger;
+    var menuObject = new Object();
+    for(var i = 0; i < menuArr.length; i++){
+        if(menuArr[i][2] == -1){
+            if(menuObject[menuArr[i][0]] == null){
+                menuObject[menuArr[i][0]] = new node(menuArr[i][1]);
+            }else{
+                menuObject[menuArr[i][0]].name =  menuObject[menuArr[i][1]];
+            }
+        }else{
+            var fatherNo = menuArr[i][2];
+            var obj = findId(menuObject, fatherNo);
+            if(obj != null){
+                if(obj.subMenu == null){
+                    obj.subMenu = new Object();
+                }
+                obj.subMenu[menuArr[i][0]] = new node(menuArr[i][1]);
+            }
+        }
+    }
+    return menuObject;
+}
+
+arr2Obj();
