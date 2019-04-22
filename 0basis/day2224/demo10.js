@@ -45,31 +45,32 @@ var menuArr = [
 
 function node(name){
     this.name = name;
-    // this.subMenu = new Object();
 }
 
 function findId(objs, n){
     for(obj in objs){
         if(obj == n){
-           return objs[obj];
+            return objs[obj];
         }else{
-            findSub(objs[obj], n);
+            var tmp = findSub(objs[obj], n);
+            if(tmp != null){
+                return tmp;
+            }
         }
     }
 }
 
 function findSub(objs, n){
-    if(objs != null){
+    if(objs != null && objs.subMenu != null){
+        objs = objs.subMenu;
         for(obj in objs){
             if(obj == n){
                 return objs[obj];
             }else{
-                if(objs[obj].subMenu != null){
-                    findSub(objs[obj][subMenu], n);
-                }
+                findSub(objs[obj], n);
             }
         }
-    }
+    }   
 }
 
 function arr2Obj(){
