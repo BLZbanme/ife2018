@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>day2224_demo6</title>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <input id="queue-input" type="text">
+        <p id="queue-cont">队列内容：apple&lt;-pear</p>    
+        <button id="in-btn">入队</button>
+        <button id="out-btn">出队</button>
+        <button id="font-btn">打印队头元素内容</button>
+        <button id="empty-btn">判断队列是否为空</button>
+        <script>
+            var queue = ["apple", "pear"];
+            document.querySelector('#in-btn').onclick = function(){
+                var txt = document.querySelector('#queue-input').value;
+                queue.push(txt);
+                print();
+            };
+
+            function print(){
+                var p = document.querySelector('#queue-cont');
+                p.innerHTML = '队列内容：';
+                p.innerHTML += queue.join('<-');
+            }
+
+            document.querySelector('#out-btn').onclick = function(){
+                queue.shift();
+                print();
+            }
+
+            document.querySelector('#font-btn').onclick = function(){
+                if(queue.length == 0){
+                    return;
+                }
+                var p = document.querySelector('#queue-cont');
+                p.innerHTML += ' 队头元素为：' + queue[0];
+            }
+            
+            document.querySelector('#empty-btn').onclick = function(){
+                if(queue.length == 0){
+                    alert('队列为空');
+                }else{
+                    alert('队列非空');
+                }
+            }
+        </script>   
+    </body>
+</html>

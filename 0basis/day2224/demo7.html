@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>day2224_demo7</title>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <input id="stack-input" type="text">
+        <p id="stack-cont">栈内容：apple&gt;pear</p>    
+        <button id="push-btn">进栈</button>
+        <button id="pop-btn">退栈</button>
+        <button id="font-btn">打印栈顶元素内容</button>
+        <button id="empty-btn">判断栈是否为空</button>
+        <script>
+            var stack = ["apple", "pear"];
+
+            function print(){
+                var p = document.querySelector('#stack-cont');
+                p.innerHTML = '栈内容：';
+                p.innerHTML += stack.join('->');
+            }
+            document.querySelector('#push-btn').onclick = function(){
+                var txt = document.querySelector('#stack-input').value;
+                stack.unshift(txt);
+                print();
+            }
+
+            document.querySelector('#pop-btn').onclick = function(){
+                stack.shift();
+                print();
+            }
+
+            document.querySelector('#font-btn').onclick = function(){
+                if(stack.length == 0){
+                    return;
+                }
+                var p = document.querySelector('#stack-cont');
+                p.innerHTML += ' 栈顶元素为：' + stack[0];
+            }
+            
+            document.querySelector('#empty-btn').onclick = function(){
+                if(stack.length == 0){
+                    alert('队列为空');
+                }else{
+                    alert('队列非空');
+                }
+            }
+        </script>   
+    </body>
+</html>
