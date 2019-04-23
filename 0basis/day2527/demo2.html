@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            div{
+                margin: 0 auto;
+                width: 70%;
+            }
+            p{
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+                <p></p>
+        </div>
+        <script>
+            function fullBit(num){
+                var result = num;
+                if(num < 10){
+                    result = '0' + num;
+                }
+                return result;
+            }
+
+            function whatDay(){
+                var now = new Date();
+                var weekday = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+                return weekday[now.getDay()];
+            }
+
+            function print(year, month, day, weekday, hour, min, sec){
+                var html = year + '年' + month + '月' + day + '日' + weekday + ' ' + hour + ':' + min + ':' + sec;  
+                document.querySelectorAll('p')[0].innerHTML = html;
+            }
+
+            function showTime(){
+                var now = new Date();
+                var year = now.getFullYear();
+                var month = fullBit(now.getMonth() + 1);
+                var day = fullBit(now.getDate());
+                var hour = fullBit(now.getHours());
+                var min = fullBit(now.getMinutes());
+                var sec = fullBit(now.getSeconds());
+                var weekday = whatDay();
+                print(year, month, day, weekday, hour, min, sec);
+                setTimeout(showTime, 1000);
+            }
+            showTime();
+        </script>
+    </body>
+</html>
