@@ -25,41 +25,127 @@
             <p id="result-wrapper">现在距离 2001年1月1日星期X HH:MM:SS 还有 X 天 X 小时 X 分 X 秒</p>
         </div>
         <script>
-            function addOption(father, start, end, fullZero){
+            function addOption(father, start, end){
                 var select = document.querySelector('#' + father);
                 for(i = start; i <= end; i++){
                     var option = document.createElement('option');
                     option.value = i;
-                    if(fullZero && i < 10){
-                        option.innerHTML = '0' + i;
-                    }else{
-                        option.innerHTML = i;
-                    }
+                    option.innerHTML = addZero(i);
                     select.appendChild(option);
                 }
             }
 
-            (function init(){
+            function addZero(n){
+                if(n < 10){
+                    return '0' + n;
+                }
+                return n;
+            }
+
+            function init(){
                 addOption('year-select', 2000, 2032);
                 addOption('month-select', 1, 12);
                 addOption('day-select', 1, 31);
-                addOption('hour-select', 0, 23, true);
-                addOption('minite-select', 0, 59, true);
-                addOption('second-select', 0, 59, true);
-            })();
+                addOption('hour-select', 0, 23);
+                addOption('minite-select', 0, 59);
+                addOption('second-select', 0, 59);
+            }
+            init();
+            var arr = [4, 6, 9, 11];
 
-            function yearChange(){
-                var year = document.querySelector('#year-selector').value;
-                if(year != null){
-                    
+            function find(arr, n){
+                for(var i = 0; i < arr.length; i++){
+                    if(arr[i] == n){
+                        return true;
+                    }
+                }
+                return false;
+            }
+
+            function change(){
+                var daySelector = document.querySelector('#day-select');
+                if(daySelector.length < 31){
+                    for(var i = daySelector.length + 1; i <= 31; i++){
+                        var option = document.createElement('option');
+                        option.value = i;
+                        option.innerHTML = i;
+                        daySelector.appendChild(option);
+                    }
+                }
+                var year = document.querySelector('#year-select').value;
+                var month = document.querySelector('#month-select').value;
+                if(year != null && month != null){
+                    if(find(arr, month)){
+                        daySelector.remove(30);
+                    }
+                    if((year % 4 == 0 && year % 100 !=0) || year % 400 == 0){
+                        if((month == 2)){
+                            daySelector.remove(30);
+                            daySelector.remove(29);
+                            daySelector.remove(28);
+                        }
+                    }else{
+                        if((month == 2)){
+                            daySelector.remove(30);
+                            daySelector.remove(29);
+                        }
+                    }
                 }
             }
+
+            function whatDay(data){
+                var weekday = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+                return weekday[data.getDay()];
+            }
+
+            function print(){
+                var now = new Date();
+                var year = document.querySelector('#year-select').value;
+                var month = document.querySelector('#month-select').value;
+                var day = document.querySelector('#day-select').value;
+                var hour = document.querySelector('#hour-select').value;
+                var min = document.querySelector('#minite-select').value;
+                var sec = document.querySelector('#second-select').value; 
+                var choose = new Date();
+                choose.setFullYear(year);
+                choose.setMonth(month - 1);
+                choose.setDate(day);
+                choose.setHours(hour);
+                choose.setMinutes(min);
+                choose.setSeconds(sec);
+                var word;
+                var tmp 
+                if((tmp = now.getTime() - choose.getTime()) > 0){
+                    word = '已经过去';
+                }else{
+                    word = '还有';
+                    tmp = -tmp;
+                }
+                var delDay = Math.floor(tmp/(24 * 60 * 60 * 1000));
+                tmp = tmp % (24 * 60 * 60 * 1000);
+                var delHour = Math.floor(tmp/(60 * 60 * 1000)); 
+                tmp = tmp % (60 * 60 * 1000);
+                var delMin = Math.floor(tmp / (60 * 1000));
+                tmp = tmp % (60 * 1000);
+                var delSec = Math.floor(tmp / 1000);
+                var html = '现在距离 ' + year + '年' + month + '月' + day + '日' + whatDay(choose) + addZero(hour) + ':' + addZero(min) + ':' + addZero(sec) + word + delDay + '天' + delHour + '小时' + delMin + '分' + delSec + '秒';
+                document.querySelector('#result-wrapper').innerHTML = html;
+                setTimeout(print, 1000);
+            }
+
+            print();
 
             document.querySelector('div').onchange = function(e){
                 switch(e.target.id){
                     case 'year-select': 
-                        yearChange();
+                        change();
                         break; 
+                    case 'month-select': 
+                        change();
+                        break;
+                    case 'day-select': 
+                        change();
+                        break;
                 }
             }
             
