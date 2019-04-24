@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            .email-sug {
+                display: none;
+            }
+            ul{
+                list-style-type: none;
+                padding-left: 0;
+            }
+        </style>
+        
+    </head>
+    <body>
+        <div class="wrapper">
+            <input id="email-input" type="text">
+            <ul id="email-sug-wrapper" class="email-sug"></ul>
+        </div>
+        <script>
+            function cleanLi(){
+                var ul = document.querySelector('#email-sug-wrapper');
+                var lis = document.querySelectorAll('li');
+                for(i = 0; i < lis.length; i++){
+                    lis[i].remove();
+                }
+            }
+
+            function isShow(){
+                var txt = getInput();
+                if(txt != ''){
+                    show();
+                }else{
+                    notShow();   
+                }
+            }
+
+            function show(){
+                document.querySelector('#email-sug-wrapper').style.display = 'block';
+            }
+
+            function notShow(){
+                document.querySelector('#email-sug-wrapper').style.display = 'none';
+            }
+
+            function getInput() {
+                return txt = document.querySelector('#email-input').value.trim();
+            }
+            var postfixList = ['163.com', 'gmail.com', '126.com', 'qq.com', '263.net'];
+
+            document.querySelector('#email-input').oninput = function(){
+                isShow();
+                creatLi();    
+                if(getInput() == ''){
+                    cleanLi(); 
+                }  
+            }
+
+            function creatLi(){
+                var txt = getInput();
+                var ul = document.querySelector('#email-sug-wrapper');
+                cleanLi();
+                var index;
+                var arr = [];
+                var html;
+                if((index = txt.search('@')) != -1){
+                    html = txt.substring(0, index);
+                    var after = txt.substring(index + 1, txt.length);
+                    if(after != null){
+                        for(i = 0; i  < postfixList.length; i++){
+                            if(postfixList[i].indexOf(after) == 0){
+                                arr.push(postfixList[i]);
+                            };
+                        }
+                    }
+                }else{
+                    html = txt;
+                    arr = postfixList;
+                }
+                if(arr.length == 0){
+                    arr = postfixList;
+                }
+                for(i = 0; i < arr.length; i++){
+                    var li = document.createElement('li');
+                    li.innerHTML = html + '@' + arr[i];
+                    ul.appendChild(li);
+                }
+            }
+
+            document.querySelector('#email-sug-wrapper').onclick = function(e){
+                if(e.target.tagName == 'LI'){
+                    var html = e.target.innerHTML;
+                    document.querySelector('#email-input').value = html;
+                    notShow();
+                }
+            }
+        </script>
+    </body>
+</html>
