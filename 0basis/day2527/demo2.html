@@ -14,6 +14,7 @@
     <body>
         <div>
                 <p></p>
+                <p></p>
         </div>
         <script>
             function fullBit(num){
@@ -30,12 +31,22 @@
                 return weekday[now.getDay()];
             }
 
-            function print(year, month, day, weekday, hour, min, sec){
-                var html = year + '年' + month + '月' + day + '日' + weekday + ' ' + hour + ':' + min + ':' + sec;  
-                document.querySelectorAll('p')[0].innerHTML = html;
+            function enWeekDay(){
+                var now = new Date();
+                var weekday = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+                return weekday[now.getDay()];
             }
 
-            function showTime(){
+
+            function print(year, month, day, weekday, hour, min, sec){
+                var htmlCN = year + '年' + month + '月' + day + '日' + weekday + ' ' + hour + ':' + min + ':' + sec;  
+                document.querySelectorAll('p')[0].innerHTML = htmlCN;
+                var pm = hour >= 12 ? 'PM' : 'AM';
+                var htmlEN = year + '-' + month + '-' + day + ' ' + enWeekDay() + ' ' + hour + ':' + min + ':' + sec + ' ' + pm;  
+                document.querySelectorAll('p')[1].innerHTML = htmlEN;
+            }
+
+            (function showTime(){
                 var now = new Date();
                 var year = now.getFullYear();
                 var month = fullBit(now.getMonth() + 1);
@@ -46,8 +57,7 @@
                 var weekday = whatDay();
                 print(year, month, day, weekday, hour, min, sec);
                 setTimeout(showTime, 1000);
-            }
-            showTime();
+            })();
         </script>
     </body>
 </html>
