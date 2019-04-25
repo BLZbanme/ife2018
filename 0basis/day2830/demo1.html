@@ -9,6 +9,12 @@
                 list-style-type: none;
                 padding-left: 0;
             }
+            li.onChoose{
+                background-color: pink;
+            }
+            li.onMouse{
+                background: blue;
+            }
         </style>
         
     </head>
@@ -18,6 +24,23 @@
             <ul id="email-sug-wrapper" class="email-sug"></ul>
         </div>
         <script>
+            var HtmlUtil = {
+                htmlEncode: function(html){
+                    var temp = document.createElement('div');
+                    temp.innerText = html;
+                    var output = temp.innerHTML;
+                    temp = null;
+                    return output;
+                },
+
+                htmlDecode: function(text){
+                    var temp = document.createElement('div');
+                    temp.innerHTML = text;
+                    var output = temp.innerText;
+                    temp = null;
+                    return output;
+                }
+            }
             function cleanLi(){
                 var ul = document.querySelector('#email-sug-wrapper');
                 var lis = document.querySelectorAll('li');
@@ -57,7 +80,8 @@
             }
 
             function creatLi(){
-                var txt = getInput();
+                var txt = HtmlUtil.htmlEncode(getInput());
+                // var txt = getInput();
                 var ul = document.querySelector('#email-sug-wrapper');
                 cleanLi();
                 var index;
@@ -80,18 +104,34 @@
                 if(arr.length == 0){
                     arr = postfixList;
                 }
+                var emailInput = document.querySelector('#email-input');
                 for(i = 0; i < arr.length; i++){
                     var li = document.createElement('li');
+
+                    li.style.width = emailInput.clientWidth + emailInput.style.borderLeftWidth + emailInput.style.borderRightWidth + 'px';
                     li.innerHTML = html + '@' + arr[i];
                     ul.appendChild(li);
                 }
+                document.querySelectorAll('li')[0].className = 'onChoose';
             }
 
             document.querySelector('#email-sug-wrapper').onclick = function(e){
                 if(e.target.tagName == 'LI'){
                     var html = e.target.innerHTML;
-                    document.querySelector('#email-input').value = html;
+                    document.querySelector('#email-input').value = HtmlUtil.htmlDecode(html);
                     notShow();
+                }
+            }
+
+            document.querySelector('#email-sug-wrapper').onmouseover = function(e){
+                if(e.target.tagName = 'li'){
+                    var ago = document.querySelector('li.onMouse');
+                    if(ago != null && ago.className != 'onChoose'){
+                        ago.className = '';
+                    }
+                    if(e.target.className != 'onChoose'){
+                        e.target.className = 'onMouse';
+                    }
                 }
             }
         </script>
