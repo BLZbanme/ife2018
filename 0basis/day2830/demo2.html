@@ -24,6 +24,11 @@
             <ul id="email-sug-wrapper" class="email-sug"></ul>
         </div>
         <script>
+            function focus(){
+                document.querySelector('#email-input').focus();
+            }
+            focus();
+            var classIndex = 0;
             var HtmlUtil = {
                 htmlEncode: function(html){
                     var temp = document.createElement('div');
@@ -112,7 +117,7 @@
                     li.innerHTML = html + '@' + arr[i];
                     ul.appendChild(li);
                 }
-                document.querySelectorAll('li')[0].className = 'onChoose';
+                document.querySelectorAll('li')[classIndex].className = 'onChoose';
             }
 
             document.querySelector('#email-sug-wrapper').onclick = function(e){
@@ -120,6 +125,7 @@
                     var html = e.target.innerHTML;
                     document.querySelector('#email-input').value = HtmlUtil.htmlDecode(html);
                     notShow();
+                    focus();
                 }
             }
 
@@ -141,29 +147,27 @@
             }
 
             function preFind(){
-                var nowLi = document.querySelector('li.onChoose');
-                if(nowLi != null){
-                    var preLi = nowLi.previousElementSibling == null ? nowLi.parentElement.lastElementChild : nowLi.previousElementSibling;
-                    nowLi.className = '';
-                    preLi.className = 'onChoose';
-                }
-                
-                
+                var lis = document.querySelectorAll('li');
+                lis[classIndex].className = '';
+                classIndex = classIndex == 0 ? lis.length - 1 : classIndex - 1;  
+                lis[classIndex].className = 'onChoose';
             }
 
             function nextFind(){
-                var nowLi = document.querySelector('li.onChoose');
-                if(nowLi != null){
-                    var nextLi = nowLi.nextElementSibling == null ? nowLi.parentElement.firstElementChild : nowLi.nextElementSibling;
-                    nowLi.className = '';
-                    nextLi.className = 'onChoose';
-                }
+                var lis = document.querySelectorAll('li');
+                lis[classIndex].className = '';
+                classIndex = classIndex == lis.length - 1 ? 0 : classIndex + 1;  
+                lis[classIndex].className = 'onChoose';
             }
 
             function enter(){
                 var nowLi = document.querySelector('li.onChoose');
                 document.querySelector('#email-input').value = HtmlUtil.htmlDecode(nowLi.innerHTML);
                 notShow();
+            }
+
+            function esc(){
+                document.querySelector('#email-input').select();
             }
 
             window.onkeydown = function(e){
@@ -176,7 +180,10 @@
                         break;    
                     case 13:
                         enter();
-                        break;   
+                        break; 
+                    case 27:
+                        esc();
+                        break;     
                 }
             }
             
