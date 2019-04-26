@@ -1,31 +1,117 @@
 <!DOCTYPE html>
 <html>
     <head>
-        
+        <style>
+            div {
+                width : 80%;
+                margin: 0 auto;
+            }
+            
+        </style>
     </head>
     <body>
-        <select id="region-select">
-            <option value=1>华东</option>
-            <option value=2>华北</option>
-            <option value=3>华南</option>
-        </select>
-        <div id='table-wrapper'>
+        <div>
+            <select id="region-select">
+                <option style='display: none'></option>
+                <option value=1>华东</option>
+                <option value=2>华北</option>
+                <option value=3>华南</option>
+            </select>
+            <div id='table-wrapper'>
 
+            </div>
         </div>
         <script>
+            let sourceData = [{
+                product: "手机",
+                region: "华东",
+                sale: [120, 100, 140, 160, 180, 185, 190, 210, 230, 245, 255, 270]
+            }, {
+                product: "手机",
+                region: "华北",
+                sale: [80, 70, 90, 110, 130, 145, 150, 160, 170, 185, 190, 200]
+            }, {
+                product: "手机",
+                region: "华南",
+                sale: [220, 200, 240, 250, 260, 270, 280, 295, 310, 335, 355, 380]
+            }, {
+                product: "笔记本",
+                region: "华东",
+                sale: [50, 60, 80, 110, 30, 20, 70, 30, 420, 30, 20, 20]
+            }, {
+                product: "笔记本",
+                region: "华北",
+                sale: [30, 35, 50, 70, 20, 15, 30, 50, 710, 130, 20, 20]
+            }, {
+                product: "笔记本",
+                region: "华南",
+                sale: [80, 120, 130, 140, 70, 75, 120, 90, 550, 120, 110, 100]
+            }, {
+                product: "智能音箱",
+                region: "华东",
+                sale: [10, 30, 4, 5, 6, 5, 4, 5, 6, 5, 5, 25]
+            }, {
+                product: "智能音箱",
+                region: "华北",
+                sale: [15, 50, 15, 15, 12, 11, 11, 12, 12, 14, 12, 40]
+            }, {
+                product: "智能音箱",
+                region: "华南",
+                sale: [10, 40, 10, 6, 5, 6, 8, 6, 6, 6, 7, 26]
+            }]
+            let months = ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'];
+
+            function createTableHeader(table){
+                var thr = document.createElement('tr');
+                var sp = document.createElement('th');
+                sp.innerHTML = '商品';
+                thr.appendChild(sp);
+                var dq = document.createElement('th');
+                dq.innerHTML = '地区';
+                thr.appendChild(dq);
+                for(let i = 0; i < 12; i++){
+                    var month = document.createElement('th');
+                    month.innerHTML = months[i];
+                    thr.appendChild(month);
+                }
+                table.appendChild(thr);
+            }
+
+            function createtableRow(table){
+                for(let obj in sourceData){
+                    var tr = document.createElement('tr');
+                    var sp = document.createElement('td');
+                    sp.innerHTML = sourceData[obj].product;
+                    tr.appendChild(sp);
+                    var dq = document.createElement('td');
+                    dq.innerHTML = sourceData[obj].region;
+                    tr.appendChild(dq);
+                    var saleArr = sourceData[obj].sale;
+                    for(let i = 0; i < saleArr.length; i++){
+                        var td = document.createElement('td');
+                        td.innerHTML = saleArr[i];
+                        tr.appendChild(td);
+                    }
+                    table.appendChild(tr);
+                }
+            }
             function changeTable(){
-                var region = document.querySelector('#region-selector').value;
+                var region = document.querySelector('#region-select').value;
                 // var product = document.querySelector('#product-selector').value;
                 // var month = document.querySelector('#month-selector').value;
                 if(region != ''){
-
-                }else{
                     
+                }else{
+                    var table = document.createElement('table'); 
+                    table.style.border = '1px'; 
+                    var div = document.querySelector('#table-wrapper');
+                    div.appendChild(table);
+                    createTableHeader(table);
+                    createtableRow(table);
                 }
             }
-            document.querySelector('#region-select').onchange = function(){
-                
-            }
+            // changeTable();
+            document.querySelector('#region-select').onchange = changeTable();
         </script>
     </body>
 </html>
