@@ -6,16 +6,45 @@
                 width : 80%;
                 margin: 0 auto;
             }
+
+            table{
+                margin: 0 auto;
+            }
+
+            td {
+                text-align: center;
+            }
             
         </style>
     </head>
     <body>
-        <div>
+        <div id='total'>
             <select id="region-select">
-                <option style='display: none'></option>
-                <option value=1>华东</option>
-                <option value=2>华北</option>
-                <option value=3>华南</option>
+                <option style='display: none' value=''></option>
+                <option value='华东'>华东</option>
+                <option value='华北'>华北</option>
+                <option value='华南'>华南</option>
+            </select>
+            <select id="product-select">
+                <option style='display: none' value=''></option>
+                <option value='手机'>手机</option>
+                <option value='笔记本'>笔记本</option>
+                <option value='智能音箱'>智能音箱</option>
+            </select>
+            <select id="month-select">
+                <option style='display: none' value=''></option>
+                <option value='0'>一月</option>
+                <option value='1'>二月</option>
+                <option value='2'>三月</option>
+                <option value='3'>四月</option>
+                <option value='4'>五月</option>
+                <option value='5'>六月</option>
+                <option value='6'>七月</option>
+                <option value='7'>八月</option>
+                <option value='8'>九月</option>
+                <option value='9'>十月</option>
+                <option value='10'>十一月</option>
+                <option value='11'>十二月</option>
             </select>
             <div id='table-wrapper'>
 
@@ -77,16 +106,32 @@
                 table.appendChild(thr);
             }
 
-            function createtableRow(table){
+            function filterSourceData(){
+                var region = document.querySelector('#region-select').value;
+                var product = document.querySelector('#product-select').value;
+                if(region == '' && product == ''){
+                    return sourceData;
+                }
+                var result = [];
                 for(let obj in sourceData){
+                    if((region == '' || sourceData[obj].region == region) && (product == '' || sourceData[obj].product == product)){
+                        result.push(sourceData[obj]);
+                    }
+                }
+                return result
+            }
+
+            function createtableRow(table){
+                var data = filterSourceData();
+                for(let obj in data){
                     var tr = document.createElement('tr');
                     var sp = document.createElement('td');
-                    sp.innerHTML = sourceData[obj].product;
+                    sp.innerHTML = data[obj].product;
                     tr.appendChild(sp);
                     var dq = document.createElement('td');
-                    dq.innerHTML = sourceData[obj].region;
+                    dq.innerHTML = data[obj].region;
                     tr.appendChild(dq);
-                    var saleArr = sourceData[obj].sale;
+                    var saleArr = data[obj].sale;
                     for(let i = 0; i < saleArr.length; i++){
                         var td = document.createElement('td');
                         td.innerHTML = saleArr[i];
@@ -95,23 +140,22 @@
                     table.appendChild(tr);
                 }
             }
+
             function changeTable(){
-                var region = document.querySelector('#region-select').value;
-                // var product = document.querySelector('#product-selector').value;
-                // var month = document.querySelector('#month-selector').value;
-                if(region != ''){
-                    
-                }else{
-                    var table = document.createElement('table'); 
-                    table.style.border = '1px'; 
-                    var div = document.querySelector('#table-wrapper');
-                    div.appendChild(table);
-                    createTableHeader(table);
-                    createtableRow(table);
-                }
+                document.querySelector('#table-wrapper').innerHTML = '';
+                var table = document.createElement('table'); 
+                table.border = '1px solid black'; 
+                table.rules = 'all';
+                var div = document.querySelector('#table-wrapper');
+                div.appendChild(table);
+                createTableHeader(table);
+                createtableRow(table);
             }
-            // changeTable();
-            document.querySelector('#region-select').onchange = changeTable();
+            var regionSelect = document.querySelector('#region-select');
+            regionSelect.addEventListener('change', changeTable);
+            var productSelect = document.querySelector('#product-select');
+            productSelect.addEventListener('change', changeTable);
+            changeTable();
         </script>
     </body>
 </html>
