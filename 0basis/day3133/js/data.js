@@ -34,4 +34,37 @@ let sourceData = [{
     product: "智能音箱",
     region: "华南",
     sale: [10, 40, 10, 6, 5, 6, 8, 6, 6, 6, 7, 26]
-}]
+}];
+
+let months = ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'];
+let regionArray = ['华东', '华北', '华南' ];
+let productArray = ['手机', '笔记本', '智能音箱' ];
+let regions = [
+    {
+        value: 0,
+        text: '华东'
+    },
+    {
+        value: 1,
+        text: '华北' 
+    },
+    {
+        value: 2,
+        text: '华南' 
+    }
+    ];
+
+let products = [
+{
+    value: 0,
+    text: '手机'
+},
+{
+    value: 1,
+    text: '笔记本' 
+},
+{
+    value: 2,
+    text: '智能音箱'
+}
+];
