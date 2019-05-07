@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <style>
+            div {
+                width : 80%;
+                margin: 0 auto;
+            }
+
+            table{
+                margin: 0 auto;
+            }
+
+            td {
+                text-align: center;
+            }
+
+            .edit-div {
+                width:99%;
+                display: flex;
+                justify-content: space-between;
+                flex-wrap: nowrap;
+                align-items: center;
+                margin:0;
+            }
+
+            .edit-p {
+                display: flex;
+                flex-direction: column;
+                margin: 0;
+            }
+
+            .edit-p a {
+                font-size: 0.1rem;
+                white-space: nowrap;
+                border: 0.5px solid grey;
+            }
+            
+        </style>
+        
+    </head>
+    <body>
+        <div id='total'>
+            <div id="region-radio-wrapper"></div>
+            <div id="product-radio-wrapper"></div>
+            <div>
+                <button id='save'>保存</button>
+                <button id='clear'>清除LocalStorage</button>
+            </div>
+            <div id='table-wrapper'></div>
+        </div>
+        <script src='./js/data.js'></script>
+        <script src='./js/box.js'></script>
+        <script src='./js/table.js'></script>
+        <script src='./js/app.js'></script>
+        
+        <script>
+            creatCheckBox('region-radio-wrapper', regions);
+            creatCheckBox('product-radio-wrapper', products);
+            changeTable();
+        </script>
+    </body>
+</html>
