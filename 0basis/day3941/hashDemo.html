@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <div id="button-div">
+            <button id="a">A</button>
+            <button id="b">B</button>
+            <button id="c">C</button>
+        </div>
+        <div id="cont">
+        </div>
+        <script>
+            let map = {
+                "a": "A",
+                "b": "B",
+                "c": "C"
+            }
+
+            function getHashContent(){
+                if(window.location.hash != undefined){
+                    return map[window.location.hash.substring(1, window.location.hash.length)];
+                }
+                
+            }
+
+            function reload(){
+                if(getHashContent() != undefined){
+                    document.querySelector("#cont").innerHTML = getHashContent();
+                }     
+            }
+
+            document.querySelector("#button-div").onclick = function(e){
+                switch(e.target.id){
+                    case "a":
+                        window.location.hash = "a";
+                        break;
+                    case "b":
+                        window.location.hash = "b";
+                        break;
+                    case "c":
+                        window.location.hash = "c";
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            window.onhashchange = reload;
+            reload();
+        </script>
+    </body>
+</html>
