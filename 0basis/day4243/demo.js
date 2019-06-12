@@ -16,33 +16,41 @@ function Employee(id, name, salary){
     this.name = name;
 }
 
-Employee.prototype.finishAWork = function(){
+Employee.prototype.finishWork = function(){
 
 }
 
 function Waiter(id, name, salary){
-    Employee.call(this, [id, name, salary]);
-    this.finishWork = function(args){
-        if(typeof args == "array"){
-            console.log("记录点菜");
-        }else{
-            console.log("上菜");
-        }
-    }
+    Employee.apply(this, [id, name, salary]);
 }
 
-function Cook(id, name, salary){
-    Employee.call(this, [id, name, salary]);
-    this.finishWork = function(args){
-        console.log("烹饪出菜品");
+Waiter.prototype = new Employee();
+Waiter.prototype.constructor = Waiter;
+Waiter.prototype.finishWork = function(args){
+    if(typeof args == "array"){
+        console.log("记录点菜");
+    }else{
+        console.log("上菜");
     }
+} 
+
+
+function Cook(id, name, salary){
+    Employee.apply(this, [id, name, salary]);
+}
+
+Cook.prototype = new Employee();
+Cook.prototype.constructor = Cook;
+Cook.prototype.finishWork = function(){
+    console.log("烹饪出菜品");
 }
 
 function Customer(){
-    this.order = function(){
-        console.log("点菜吃菜")
-    }
 }
+
+Customer.prototype.order = function(){
+    console.log("点菜吃菜")
+};
 
 function Food(name, cost, price){
     this.name = name;
