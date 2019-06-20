@@ -108,3 +108,4 @@ const customers = [new Customer(), new Customer()];
 var newCook = new Cook("Tony", 10000);
 
 customers[0].coming();
+
